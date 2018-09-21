@@ -23,6 +23,6 @@ RUN apt-get update && \
     rm apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz && \
     chown -R hduser:hadoop ${MAHOUT_HOME} && \
     chmod -R 777 ${MAHOUT_HOME} && \
-    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/profile
+    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/environment
 
 ENTRYPOINT ["./entrypoint.sh"]
