@@ -20,6 +20,7 @@ RUN apk --update add --no-cache curl net-tools && \
     rm -r /usr/local/apache-mahout-distribution-${MAHOUT_VERSION} && \
     rm apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz && \
     chown -R hduser:hadoop ${MAHOUT_HOME} && \
-    chmod -R 777 ${MAHOUT_HOME}
+    chmod -R 777 ${MAHOUT_HOME} && \
+    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/profile
 
 ENTRYPOINT ["./entrypoint.sh"]
