@@ -5,4 +5,4 @@ services:
 
 script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - make publish-mahout
+  - ./build.sh
