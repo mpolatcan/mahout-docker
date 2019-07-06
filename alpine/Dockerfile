@@ -21,5 +21,4 @@ RUN apk --update add --no-cache curl net-tools && \
     chmod -R 777 ${MAHOUT_HOME} && \
     echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/profile
 
-ENTRYPOINT ["./hadoop_entrypoint.sh"]
-CMD ["tail","-f","/dev/null"]
+ENTRYPOINT ["./hadoop_entrypoint.sh", "hadoop"]

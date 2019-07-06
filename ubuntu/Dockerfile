@@ -23,5 +23,4 @@ RUN apt-get update && \
     chmod -R 777 ${MAHOUT_HOME} && \
     echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/environment
 
-ENTRYPOINT ["./hadoop-entrypoint.sh"]
-CMD ["tail","-f","/dev/null"]
+ENTRYPOINT ["./hadoop-entrypoint.sh", "hadoop"]
