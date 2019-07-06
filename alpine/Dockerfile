@@ -2,8 +2,6 @@ ARG HADOOP_VERSION=2.9.0
 
 FROM mpolatcan/hadoop:alpine-${HADOOP_VERSION}
 
-# TODO Configurations will be added
-
 ARG MAHOUT_VERSION=0.13.0
 ARG MAHOUT_DOWNLOAD_LINK="http://www-eu.apache.org/dist/mahout/${MAHOUT_VERSION}/apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz"
 
@@ -23,4 +21,5 @@ RUN apk --update add --no-cache curl net-tools && \
     chmod -R 777 ${MAHOUT_HOME} && \
     echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/profile
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./hadoop_entrypoint.sh"]
+CMD ["tail","-f","/dev/null"]

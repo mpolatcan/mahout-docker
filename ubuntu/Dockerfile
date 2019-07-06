@@ -2,8 +2,6 @@ ARG HADOOP_VERSION=2.9.0
 
 FROM mpolatcan/hadoop:ubuntu-${HADOOP_VERSION}
 
-# TODO Configurations will be added
-
 ARG MAHOUT_VERSION=0.13.0
 ARG MAHOUT_DOWNLOAD_LINK="http://www-eu.apache.org/dist/mahout/${MAHOUT_VERSION}/apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz"
 
@@ -25,4 +23,5 @@ RUN apt-get update && \
     chmod -R 777 ${MAHOUT_HOME} && \
     echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/environment
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./hadoop-entrypoint.sh"]
+CMD ["tail","-f","/dev/null"]
