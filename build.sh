@@ -17,11 +17,7 @@ MAHOUT_VERSIONS=(
     "0.14.0"
     "0.13.0"
     "0.12.2"
-    "0.12.1"
-    "0.12.0"
     "0.11.2"
-    "0.11.1"
-    "0.11.0"
 )
 
 DISTS=(
@@ -35,7 +31,7 @@ DISTS=(
 function build_image() {
     sudo docker build -q -t mpolatcan/mahout:$1-$2-hadoop-$3 --build-arg MAHOUT_VERSION=$2 --build-arg HADOOP_VERSION=$3 ./$1/
 	sudo docker push mpolatcan/mahout:$1-$2-hadoop-$3
-	sudo docker rmi mpolatcan/mahout:$1-$2-hadoop-$3
+	sudo docker rmi $(sudo docker images -q)
 }
 
 for MAHOUT_VERSION in ${MAHOUT_VERSIONS[@]}; do
