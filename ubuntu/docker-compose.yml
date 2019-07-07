@@ -1,7 +1,7 @@
 version: "3"
 services:
   mahout:
-    image: mpolatcan/mahout:ubuntu-0.13.0-hadoop-2.9.0
+    image: mpolatcan/mahout:ubuntu-0.13.0-hadoop-3.1.2
     container_name: mahout
     hostname: mahout
     environment:
@@ -16,7 +16,7 @@ services:
       - 3000:8088
 
   slave:
-    image: mpolatcan/hadoop:ubuntu-2.9.0
+    image: mpolatcan/hadoop:ubuntu-3.1.2
     environment:
       - HADOOP_NODE_TYPE=datanode
       - FS_HOSTNAME=mahout
