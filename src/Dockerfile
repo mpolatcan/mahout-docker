@@ -1,6 +1,7 @@
 ARG HADOOP_VERSION=2.9.0
+ARG JAVA_VERSION=8
 
-FROM mpolatcan/hadoop:alpine-${HADOOP_VERSION}
+FROM mpolatcan/hadoop:${HADOOP_VERSION}-java${JAVA_VERSION}
 
 ARG MAHOUT_VERSION=0.13.0
 ARG MAHOUT_DOWNLOAD_LINK="http://www-eu.apache.org/dist/mahout/${MAHOUT_VERSION}/apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz"
@@ -10,7 +11,9 @@ ENV PATH $PATH:$MAHOUT_HOME/bin
 
 MAINTAINER Mutlu Polatcan <mutlupolatcan@gmail.com>
 
-RUN apk --update add --no-cache curl net-tools && \
+RUN apt-get update && \
+    apt-get -y install --no-install-recommends curl cron cronutils net-tools && \
+    rm -rf /var/lib/apt/lists/* && \
     wget ${MAHOUT_DOWNLOAD_LINK} && \
     mkdir -p ${MAHOUT_HOME} && \
     tar -xvzf apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz -C /usr/local && \
@@ -19,6 +22,6 @@ RUN apk --update add --no-cache curl net-tools && \
     rm apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz && \
     chown -R hduser:hadoop ${MAHOUT_HOME} && \
     chmod -R 777 ${MAHOUT_HOME} && \
-    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/profile
+    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/environment
 
-ENTRYPOINT ["./hadoop_entrypoint.sh", "hadoop"]
+ENTRYPOINT ["./hadoop-entrypoint.sh", "hadoop"]

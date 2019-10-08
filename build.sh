@@ -14,24 +14,27 @@ MAHOUT_VERSIONS=(
     "0.11.2"
 )
 
-DISTS=(
-    "alpine"
-    "ubuntu"
+JAVA_VERSIONS=(
+    "8"
+    "9"
+    "10"
+    "11"
+    "12"
 )
 
-# $1: DIST
-# $2: MAHOUT_VERSION
-# $3: HADOOP_VERSION
+# $1: MAHOUT_VERSION
+# $2: HADOOP_VERSION
+# $3: JAVA_VERSION
 function build_image() {
-    sudo docker build -q -t mpolatcan/mahout:$1-$2-hadoop-$3 --build-arg MAHOUT_VERSION=$2 --build-arg HADOOP_VERSION=$3 ./$1/
-	sudo docker push mpolatcan/mahout:$1-$2-hadoop-$3
-	sudo docker rmi mpolatcan/mahout:$1-$2-hadoop-$3
+  sudo docker build -q -t mpolatcan/mahout:$1-hadoop-$2-java$3 --build-arg MAHOUT_VERSION=$1 --build-arg HADOOP_VERSION=$2 --build-arg JAVA_VERSION=$3 ./src/
+	sudo docker push mpolatcan/mahout:$1-hadoop-$2-java$3
+	sudo docker rmi mpolatcan/mahout:$1-hadoop-$2-java$3
 }
 
 for MAHOUT_VERSION in ${MAHOUT_VERSIONS[@]}; do
     for HADOOP_VERSION in ${HADOOP_VERSIONS[@]}; do
-        for DIST in ${DISTS[@]}; do
-            build_image $DIST $MAHOUT_VERSION $HADOOP_VERSION
+        for JAVA_VERSION in ${JAVA_VERSIONS[@]}; do
+            build_image $MAHOUT_VERSION $HADOOP_VERSION $JAVA_VERSION
         done
     done
 done
