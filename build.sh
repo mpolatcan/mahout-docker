@@ -16,7 +16,6 @@ MAHOUT_VERSIONS=(
 
 JAVA_VERSIONS=(
     "8"
-    "11"
 )
 
 # $1: MAHOUT_VERSION
