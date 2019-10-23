@@ -12,18 +12,13 @@ ENV PATH $PATH:$MAHOUT_HOME/bin
 MAINTAINER Mutlu Polatcan <mutlupolatcan@gmail.com>
 
 USER root
-RUN apt-get update && \
-    apt-get -y install --no-install-recommends curl cron cronutils net-tools && \
-    rm -rf /var/lib/apt/lists/* && \
+RUN mkdir -p ${MAHOUT_HOME} && \
     wget ${MAHOUT_DOWNLOAD_LINK} && \
-    mkdir -p ${MAHOUT_HOME} && \
     tar -xvzf apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz -C ${HDUSER_HOME} && \
     mv ${HDUSER_HOME}/apache-mahout-distribution-${MAHOUT_VERSION}/* ${MAHOUT_HOME} && \
     rm -r ${HDUSER_HOME}/apache-mahout-distribution-${MAHOUT_VERSION} && \
     rm apache-mahout-distribution-${MAHOUT_VERSION}.tar.gz && \
-    chown -R hduser:hadoop ${MAHOUT_HOME} && \
-    chmod -R 777 ${MAHOUT_HOME} && \
-    echo "PATH=$PATH:$MAHOUT_HOME/bin" >> /etc/environment
+    chown -R hduser:hadoop ${MAHOUT_HOME}
 
 USER hduser
 ENTRYPOINT ["./hadoop-entrypoint.sh", "hadoop"]
