@@ -21,4 +21,4 @@ RUN mkdir -p ${MAHOUT_HOME} && \
     chown -R hduser:hadoop ${MAHOUT_HOME}
 
 USER hduser
-ENTRYPOINT ["./hadoop-entrypoint.sh", "hadoop"]
+ENTRYPOINT ["./hadoop_entrypoint.sh", "hadoop"]
