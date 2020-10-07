@@ -5,7 +5,7 @@ FROM mpolatcan/hadoop:${HADOOP_VERSION}-java${JAVA_VERSION}
 
 ARG MAHOUT_VERSION=""
 ARG MAHOUT_ZIP_FOLDER_NAME="apache-mahout-distribution-${MAHOUT_VERSION}"
-ARG MAHOUT_DOWNLOAD_LINK="http://www-eu.apache.org/dist/mahout/${MAHOUT_VERSION}/${MAHOUT_ZIP_FOLDER_NAME}.tar.gz"
+ARG MAHOUT_DOWNLOAD_LINK="http://downloads.apache.org/mahout/${MAHOUT_VERSION}/${MAHOUT_ZIP_FOLDER_NAME}.tar.gz"
 
 ENV MAHOUT_HOME "${HDUSER_HOME}/mahout"
 ENV PATH $PATH:$MAHOUT_HOME/bin

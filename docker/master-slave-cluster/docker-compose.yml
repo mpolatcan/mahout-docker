@@ -1,0 +1,33 @@
+version: "3"
+services:
+  master:
+    image: mpolatcan/mahout:0.13.0-hadoop-3.2.1-java8
+    container_name: master
+    hostname: master
+    environment:
+      HADOOP_DAEMONS: |
+        namenode
+        secondarynamenode
+        resourcemanager
+      YARN_SCHEDULER_MINIMUM_ALLOCATION_MB: "128"
+      YARN_SCHEDULER_MAXIMUM_ALLOCATION_MB: "1536"
+    ports:
+      - 9870:9870 # Namenode UI
+      - 9868:9868 # Secondarynamenode UI Port
+      - 8088:8088 # Resourcemanager UI Port
+
+  slave:
+    image: mpolatcan/hadoop:3.2.1-java8
+    environment:
+      HADOOP_DAEMONS: |
+        datanode
+        nodemanager
+      DFS_NAMENODE_HOSTNAME: "master"
+      YARN_RESOURCEMANAGER_HOSTNAME: "master"
+      YARN_NODEMANAGER_RESOURCE_MEMORY_MB: "1536"
+      YARN_NODEMANAGER_RESOURCE_CPU_VCORES: "2"
+    ports:
+      - 9864 # Datanode UI Port
+      - 8042 # Nodemanager UI Port
+    depends_on:
+      - master
