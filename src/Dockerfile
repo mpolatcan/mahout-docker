@@ -8,7 +8,8 @@ ARG MAHOUT_ZIP_FOLDER_NAME="apache-mahout-distribution-${MAHOUT_VERSION}"
 ARG MAHOUT_DOWNLOAD_LINK="http://downloads.apache.org/mahout/${MAHOUT_VERSION}/${MAHOUT_ZIP_FOLDER_NAME}.tar.gz"
 
 ENV MAHOUT_HOME "${HDUSER_HOME}/mahout"
-ENV PATH $PATH:$MAHOUT_HOME/bin
+ENV PATH=$PATH:$MAHOUT_HOME/bin \
+    HADOOP_CLASSPATH=$HADOOP_CLASSPATH:${MAHOUT_HOME}/*.jar
 
 MAINTAINER Mutlu Polatcan <mutlupolatcan@gmail.com>
 

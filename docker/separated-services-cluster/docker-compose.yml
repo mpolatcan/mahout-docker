@@ -16,6 +16,7 @@ services:
       HADOOP_DAEMONS: |
         resourcemanager
       FS_DEFAULTFS: "hdfs://namenode:9000"
+      YARN_RESOURCEMANAGER_HOSTNAME: "resourcemanager"
       YARN_SCHEDULER_MINIMUM_ALLOCATION_MB: "128"
       YARN_SCHEDULER_MAXIMUM_ALLOCATION_MB: "1536"
     ports:
@@ -40,7 +41,7 @@ services:
     environment:
       HADOOP_DAEMONS: |
         namenode
-      FS_DEFAULTFS: "hdfs://0.0.0.0:9000"
+      FS_DEFAULTFS: "hdfs://namenode:9000"
     ports:
       - 9870:9870
 

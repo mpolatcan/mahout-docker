@@ -10,6 +10,7 @@ services:
         secondarynamenode
         resourcemanager
       FS_DEFAULTFS: "hdfs://0.0.0.0:9000"
+      YARN_RESOURCEMANAGER_HOSTNAME: "master"
       YARN_SCHEDULER_MINIMUM_ALLOCATION_MB: "128"
       YARN_SCHEDULER_MAXIMUM_ALLOCATION_MB: "1536"
     ports:
